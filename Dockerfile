@@ -8,6 +8,7 @@ RUN npm install
 
 # Copy frontend source and build
 COPY bg-remover-app/frontend_next/ ./
+RUN ls -R
 RUN npm run build
 
 # Stage 2: Final Image (Python Backend + Static Frontend)
