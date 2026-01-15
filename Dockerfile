@@ -1,5 +1,5 @@
 # Stage 1: Build Frontend
-FROM node:20-alpine AS frontend-builder
+FROM node:20-bookworm-slim AS frontend-builder
 WORKDIR /app/frontend
 
 # Copy package files
@@ -15,10 +15,13 @@ FROM python:3.10-slim
 
 WORKDIR /app
 
-# Install system dependencies required for image processing (rembg/opencv)
+# Install system dependencies required for image processing (rembg/opencv) and downloading models
 RUN apt-get update && apt-get install -y \
     libgl1 \
     libglib2.0-0 \
+    curl \
+    wget \
+    ca-certificates \
     && rm -rf /var/lib/apt/lists/*
 
 # Install Python dependencies
@@ -27,6 +30,11 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy backend code
 COPY bg-remover-app/backend/ .
+
+# Pre-download models during build to avoid runtime timeouts/errors
+# and ensure the environment is ready.
+# Importing main will initialize the MODELS dict which calls new_session()
+RUN python -c "from main import MODELS; print('Models downloaded successfully')"
 
 # Copy built frontend static files from Stage 1 to /app/static
 COPY --from=frontend-builder /app/frontend/out /app/static
