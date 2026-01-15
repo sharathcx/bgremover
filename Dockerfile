@@ -8,6 +8,10 @@ RUN npm install
 
 # Copy frontend source and build
 COPY bg-remover-app/frontend_next/ ./
+# Debugging: List files to ensure lib/utils.ts exists
+RUN ls -la
+RUN ls -la lib/ || echo "lib/ missing"
+RUN cat tsconfig.json
 RUN npm run build
 
 # Stage 2: Final Image (Python Backend + Static Frontend)
