@@ -30,7 +30,18 @@ export function ResultCard({ modelName, resultSrc, originalSrc, index }: ResultC
             </div>
 
             {/* Image Area */}
-            <div className="relative aspect-[4/3] w-full overflow-hidden bg-[url('https://t3.ftcdn.net/jpg/02/72/06/15/360_F_272061595_gA1h0x20e03e03e03e.jpg')] bg-repeat bg-[length:400px_400px]">
+            <div className="relative aspect-[4/3] w-full overflow-hidden bg-[conic-gradient(at_top_left,_var(--tw-gradient-stops))] from-gray-900 via-gray-900 to-gray-900">
+                {/* CSS Checkerboard Pattern */}
+                <div className="absolute inset-0 opacity-20"
+                    style={{
+                        backgroundImage: `linear-gradient(45deg, #808080 25%, transparent 25%), 
+                                         linear-gradient(-45deg, #808080 25%, transparent 25%), 
+                                         linear-gradient(45deg, transparent 75%, #808080 75%), 
+                                         linear-gradient(-45deg, transparent 75%, #808080 75%)`,
+                        backgroundSize: '20px 20px',
+                        backgroundPosition: '0 0, 0 10px, 10px -10px, -10px 0px'
+                    }}
+                />
 
                 {/* Result (Base Layer) */}
                 <div className="absolute inset-0 flex items-center justify-center p-4">
