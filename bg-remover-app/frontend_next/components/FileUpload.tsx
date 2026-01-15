@@ -3,7 +3,7 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { Upload, X, FileImage } from 'lucide-react';
 import React, { useRef, useState } from 'react';
-import { cn } from '@/lib/utils';
+import { cn } from '../lib/utils';
 
 interface FileUploadProps {
     onFileSelect: (file: File) => void;
