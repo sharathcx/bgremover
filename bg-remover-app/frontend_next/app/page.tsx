@@ -32,7 +32,8 @@ export default function Home() {
       // Small artificial delay for animation smoothness if backend is too fast
       await new Promise(resolve => setTimeout(resolve, 800));
 
-      const response = await axios.post('/remove-bg', formData);
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || '';
+      const response = await axios.post(`${apiUrl}/remove-bg`, formData);
       setResults(response.data);
     } catch (err) {
       setError("Unable to connect to the processing server.");
